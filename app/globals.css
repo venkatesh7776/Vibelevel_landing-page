@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* Design tokens — see design/DESIGN.md and design/tokens.css (source of truth from Figma). */
+@theme {
+  --font-display: var(--font-inter), system-ui, sans-serif;
+  --font-body: var(--font-satoshi), system-ui, sans-serif;
+  /* Serif for the hero title and main section headings. */
+  --font-heading: var(--font-lora), Georgia, serif;
+
+  --color-ink: #000000;
+  --color-ink-900: #080808;
+  --color-brand-green: #008a43;
+  --color-brand-green-press: #006e36;
+  --color-brand-green-50: #effef4;
+  --color-headline-accent: #00a852;
+  --color-cta: #00964a;
+  --color-cta-hover: #008a43;
+  --color-pixel: #1dc804;
+  --color-glow: #4cfb6c;
+
+  --radius-pill: 130px;
+  --radius-media: 23.714px;
+
+  --shadow-btn-sheen: inset 0 1px 8.5px 0 rgba(255, 255, 255, 0.4);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ---------- Hero entrance ---------- */
+/* Everything fades from 0% to 100% opacity with a long, gentle ease-out so nothing pops in.
+   Content also drifts up a little; stagger via inline animation-delay. Opacity + transform
+   only (GPU-composited). */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.hero-rise {
+  animation: hero-rise 1800ms cubic-bezier(0.33, 0, 0.2, 1) both;
+  will-change: opacity, transform;
+}
+/* Backgrounds and chrome (navbar, glow) only fade, they don't move. */
+.hero-fade {
+  animation: hero-fade 2000ms cubic-bezier(0.33, 0, 0.2, 1) both;
+}
+
+/* ---------- Tool logo marquee ---------- */
+/* The track holds two identical copies; sliding by exactly one copy (-50%) loops seamlessly. */
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee var(--marquee-dur, 40s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------- Problem card visuals ---------- */
+/* One shared 6s story per card: pieces build up, hold, then clear and replay. */
+@keyframes pc-in {
+  0% { opacity: 0; transform: translate3d(0, 6px, 0); }
+  10%, 86% { opacity: 1; transform: translate3d(0, 0, 0); }
+  95%, 100% { opacity: 0; transform: translate3d(0, 0, 0); }
+}
+@keyframes pc-grow {
+  0% { transform: scaleX(0); }
+  14%, 88% { transform: scaleX(1); }
+  97%, 100% { transform: scaleX(0); }
+}
+@keyframes pc-banner {
+  0%, 26% { opacity: 0; transform: translate3d(0, 140%, 0); }
+  36%, 86% { opacity: 1; transform: translate3d(0, 0, 0); }
+  95%, 100% { opacity: 0; transform: translate3d(0, 140%, 0); }
+}
+@keyframes pc-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.12); }
+  50% { box-shadow: 0 0 0 5px rgba(0, 0, 0, 0); }
+}
+@keyframes pc-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+.pc-in { animation: pc-in 6s var(--ease-out-soft) infinite both; }
+.pc-grow { transform-origin: left; animation: pc-grow 6s var(--ease-out-soft) infinite both; }
+.pc-banner { animation: pc-banner 6s var(--ease-out-soft) infinite both; }
+.pc-pulse { animation: pc-pulse 2s ease-in-out infinite; }
+.pc-shimmer {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 25%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.1) 75%) 0 0 / 200% 100%;
+  animation: pc-shimmer 2.4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-in, .pc-grow, .pc-banner, .pc-pulse, .pc-shimmer { animation: none; }
+}
+
+/* ---------- Solution journey (horizontal scroll) ---------- */
+/* HorizontalJourney sets --t / --ta per panel and --progress on the wrapper from scroll.
+   As a panel leaves the centre its text fades and drifts while the visual moves at a
+   different rate, giving the sideways scroll some depth. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .journey[data-mode="h"] .journey-text {
+    opacity: calc(1 - clamp(0, (var(--ta, 0) - 0.22) * 2, 1));
+    transform: translate3d(calc(var(--t, 0) * -40px), 0, 0);
+  }
+  .journey[data-mode="h"] .journey-visual {
+    transform: translate3d(calc(var(--t, 0) * 90px), 0, 0);
+  }
+  .journey-hint {
+    opacity: calc(1 - clamp(0, var(--progress, 0) * 25, 1));
+  }
+}
+
+/* ---------- Living Pixel Field ---------- */
+
+/* Pixel Blink: dots stay fixed at their original opacity. Once per cycle each neighbourhood
+   brightens, holds briefly and settles back, so only a few small groups are lit at any time
+   and the blink keeps moving around the field. */
+@keyframes pf-blink {
+  0%, 20%, 100% { fill-opacity: var(--o); }
+  6%, 12% { fill-opacity: calc(var(--o) * 0.4 + 0.6); }
+}
+
+.pf-blink {
+  animation: pf-blink var(--pf-cycle, 6s) ease-in-out var(--pf-delay, 0s) infinite;
+}
+
+/* Paused when the hero is off-screen or the tab is hidden (see PixelFieldGate). */
+[data-pf-paused="true"] .pf-blink {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-fade,
+  .pf-blink {
+    animation: none;
+  }
+}

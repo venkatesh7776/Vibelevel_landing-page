@@ -1,0 +1,110 @@
+/* ==========================================================================
+   VibeLevel design tokens
+   Source: Figma uOy9JuizObwbgsSSob9ky9, node 1:2 (Hero section).
+   [figma]    = value taken directly from the design
+   [extended] = derived to complete the system (not in Figma yet)
+   ========================================================================== */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+/* Inter: load from Google Fonts (weights 500, 600) or next/font/google. */
+
+:root {
+  /* ---------- Typefaces ---------- */
+  --font-display: "Inter", system-ui, sans-serif;          /* [figma] headlines */
+  --font-body: "Satoshi", system-ui, sans-serif;           /* [figma] nav, body, buttons */
+
+  /* ---------- Brand greens ---------- */
+  --green-50:  #effef4;   /* [extended] */
+  --green-100: #d8fde4;   /* [extended] */
+  --green-200: #b0f9c8;   /* [extended] bottom-glow tint as seen on canvas */
+  --green-300: #4cfb6c;   /* [figma] background glow blob */
+  --green-400: #1dc804;   /* [figma] dot-pattern glow ellipses */
+  --green-500: #0deb86;   /* [figma, sampled from logo raster] logo wordmark */
+  --green-600: #008a43;   /* [figma] headline accent "Great engineers" */
+  --green-700: #006e36;   /* [extended] hover for green-600 */
+  --green-800: #0b3d2a;   /* [figma, sampled from logo raster] star shadow */
+  --green-900: #062418;   /* [extended] */
+
+  /* ---------- Neutrals ---------- */
+  --white:     #ffffff;   /* [figma] page bg, secondary button bg */
+  --gray-50:   #f7f7f7;   /* [extended] */
+  --gray-100:  #ededed;   /* [extended] */
+  --gray-200:  #d9d9d9;   /* [extended] borders/dividers */
+  --gray-400:  #9a9a9a;   /* [extended] muted text */
+  --gray-600:  #5c5c5c;   /* [extended] secondary text */
+  --gray-900:  #080808;   /* [figma] primary button, outline border */
+  --black:     #000000;   /* [figma] nav + body text */
+
+  /* ---------- Semantic ---------- */
+  --color-bg:            var(--white);
+  --color-text:          var(--black);
+  --color-text-muted:    var(--gray-600);
+  --color-accent:        var(--green-600);
+  --color-brand:         var(--green-500);
+  --color-btn-primary:   var(--gray-900);
+  --color-btn-primary-fg:var(--white);
+  --color-btn-outline:   var(--gray-900);
+  --color-media-scrim:   rgba(0, 0, 0, 0.3);   /* [figma] overlay on hero image */
+  --color-glass:         rgba(255, 255, 255, 0.26); /* [figma] play button */
+
+  /* ---------- Type scale (size / line-height / tracking) ---------- */
+  --text-display-size: 48px;  --text-display-lh: 1.15;  --text-display-track: -2px;   /* [figma] H1, Inter 500 */
+  --text-h2-size: 36px;       --text-h2-lh: 1.2;        --text-h2-track: -1.25px;     /* [extended] */
+  --text-h3-size: 24px;       --text-h3-lh: 1.3;        --text-h3-track: -0.5px;      /* [extended] */
+  --text-lead-size: 18px;     --text-lead-lh: 25.4px;                                 /* [figma] hero subtext, Satoshi 400 */
+  --text-btn-lg-size: 16px;   --text-btn-lh: 20.4px;    --text-btn-track: -0.51px;    /* [figma] hero CTAs, Satoshi 500 */
+  --text-body-size: 16px;     --text-body-lh: 24px;                                   /* [extended] */
+  --text-nav-size: 14px;      --text-nav-lh: 14px;                                    /* [figma] nav links, Satoshi 500 */
+  --text-small-size: 12px;    --text-small-lh: 16px;                                  /* [extended] */
+
+  /* ---------- Spacing (4px base) ---------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-7: 32px;  --space-8: 40px;
+  --space-10: 48px; --space-12: 64px; --space-16: 80px; --space-24: 96px;
+  /* [figma] usages: nav pad 24/80, nav gaps 32 + 24, right group 18,
+     CTA gap 12, hero copy stack 26, copy → media 95, page top 174 */
+
+  /* ---------- Layout ---------- */
+  --page-width: 1440px;       /* [figma] frame */
+  --container: 1280px;        /* [figma] nav content width (80px side pad) */
+  --content-hero: 1060px;     /* [figma] media card width */
+  --content-copy: 732px;      /* [figma] headline column */
+  --content-lead: 628px;      /* [figma] subtext column */
+
+  /* ---------- Radii ---------- */
+  --radius-sm: 4.5px;         /* [figma] logo container */
+  --radius-md: 12px;          /* [extended] cards/panels */
+  --radius-lg: 24px;          /* [figma] media card (23.714) */
+  --radius-pill: 130px;       /* [figma] all buttons */
+
+  /* ---------- Effects ---------- */
+  --shadow-btn-inner: inset 0 1px 8.5px 0 rgba(255, 255, 255, 0.4); /* [figma] dark pill sheen */
+  --shadow-card: 0 24px 60px -20px rgba(6, 36, 24, 0.25);            /* [extended] */
+  --blur-glass: 36.28px;      /* [figma] play button backdrop blur */
+  --blur-glow-sm: 100px;      /* [figma] glow ellipse 1 */
+  --blur-glow-md: 110px;      /* [figma] glow ellipse 2 */
+  --blur-glow-lg: 310px;      /* [figma] big background blob */
+
+  /* ---------- Motion [extended] ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+}
