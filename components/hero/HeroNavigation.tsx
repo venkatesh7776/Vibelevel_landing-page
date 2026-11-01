@@ -12,7 +12,7 @@ const links = [
   { label: "Pricing", href: "#pricing" },
 ];
 
-function Logo() {
+export function Logo() {
   // Figma crops the full logo raster to just the star mark, then sets the wordmark beside it.
   return (
     <Link href="/" aria-label="VibeLevel home" className="flex h-[25.769px] w-[163.61px] shrink-0 items-center gap-[1.175px] rounded-[4.52px]">

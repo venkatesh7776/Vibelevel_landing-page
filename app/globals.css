@@ -167,3 +167,37 @@ body {
     animation: none;
   }
 }
+
+/* ---------- Sections 5–9 ---------- */
+
+/* Role portraits drift gently; both sides of the comparison share one timeline, so they stay aligned. */
+@keyframes role-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -5px, 0); }
+}
+.role-float { animation: role-float 4.5s ease-in-out infinite; }
+
+/* Aura: pixel rings breathe out from the mark. */
+@keyframes aura-ring {
+  0% { opacity: 0; transform: scale(0.55); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+.aura-ring { transform-origin: center; animation: aura-ring 4.2s cubic-bezier(0.22, 1, 0.36, 1) infinite both; }
+
+/* Campus: a light sweeps across the grid of students; top performers stay lit. */
+@keyframes campus-wave {
+  0%, 30%, 100% { fill-opacity: 0.1; }
+  10%, 16% { fill-opacity: 0.55; }
+}
+.campus-wave { animation: campus-wave 4s ease-in-out infinite; }
+@keyframes campus-top {
+  0%, 100% { fill-opacity: 1; }
+  50% { fill-opacity: 0.7; }
+}
+.campus-top { animation: campus-top 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .role-float, .aura-ring, .campus-wave, .campus-top { animation: none; }
+  .aura-ring { opacity: 0.6; }
+}
