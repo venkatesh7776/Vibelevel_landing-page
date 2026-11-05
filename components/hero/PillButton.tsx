@@ -18,12 +18,12 @@ const variants: Record<Variant, string> = {
     "hover:-translate-y-px hover:border-brand-green hover:text-white focus-visible:text-white active:translate-y-0 active:border-brand-green-press",
 };
 
-// Hero primary is the Figma 143px; nav CTA is 120px. Primary buttons grow by the arrow's width
-// (16px + 8px gap) on hover/focus instead of squeezing it in.
+// Primary buttons grow by the arrow's width (16px + 8px gap) on hover/focus instead of squeezing it in.
 const sizes: Record<Variant, Record<Size, string>> = {
   primary: {
-    md: "w-[143px] py-[11px] text-[16px] hover:w-[167px] focus-visible:w-[167px]",
-    sm: "w-[120px] px-[20px] py-[8px] text-[14px] hover:w-[144px] focus-visible:w-[144px]",
+    // Sized to the label; the hover arrow widens the button as it slides in.
+    md: "px-[24px] py-[11px] text-[16px]",
+    sm: "px-[18px] py-[8px] text-[14px]",
     // Section CTAs: sized to the label, with an arrow that is always shown.
     lg: "gap-2.5 px-[27px] py-[14px] text-[17px]",
   },

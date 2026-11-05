@@ -1,0 +1,4 @@
+# Local source files that the site doesn't use (kept out of deployments)
+public/vibelevel-screening-demo-v4 copy.mp4
+public/images/Dreamy Mint Pixel Mountain Vista.png
+*.mov

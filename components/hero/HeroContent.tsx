@@ -25,11 +25,11 @@ export default function HeroContent() {
       {/* Two equal halves around the centre line keep the gap between the buttons exactly centred,
           whatever each button's width (and the primary grows leftward when its hover arrow appears). */}
       <div className="hero-rise grid w-full grid-cols-2 items-start gap-[12px]" style={{ animationDelay: "300ms" }}>
-        <PrimaryButton href="#book-demo" className="justify-self-end">
-          Book a demo
+        <PrimaryButton href="/signup" className="justify-self-end">
+          Sign up for free
         </PrimaryButton>
-        <SecondaryButton href="#how-it-works" className="justify-self-start">
-          See how it works →
+        <SecondaryButton href="/request-demo" className="justify-self-start">
+          Book a demo
         </SecondaryButton>
       </div>
     </div>

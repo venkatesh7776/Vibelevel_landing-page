@@ -4,25 +4,32 @@ import mountains from "@/public/images/screening-mountains.jpg";
 
 type FooterLink = { label: string; href?: string };
 
-// Links point at sections on this page. About, Contact and the legal pages have no URL yet, so
-// they render as plain text until one is added here.
+// Links point at pages and home-page sections. Items without a URL yet render as plain text.
 const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Screening", href: "#screening-heading" },
-      { label: "Aura", href: "#aura" },
-      { label: "Campus", href: "#campus" },
+      { label: "Screening", href: "/#screening-heading" },
+      { label: "Aura", href: "/#aura" },
+      { label: "Campus", href: "/#campus" },
     ],
   },
   {
     title: "Platform",
     links: [
-      { label: "How it works", href: "#screening-heading" },
-      { label: "Features", href: "#features-heading" },
+      { label: "How it works", href: "/#screening-heading" },
+      { label: "Features", href: "/#features-heading" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
-  { title: "Resources", links: [{ label: "About" }, { label: "Contact" }] },
+  {
+    title: "Resources",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/request-demo" },
+      { label: "FAQ", href: "/#faq-heading" },
+    ],
+  },
   { title: "Legal", links: [{ label: "Privacy Policy" }, { label: "Terms of Service" }] },
 ];
 
@@ -81,7 +88,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-2 border-t border-dashed border-black/10 py-6 font-body text-[13px] text-black/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 VibeLevel. All rights reserved.</p>
+          <p>VibeLevel.ai is a product of GPTSocial LLC — © 2026 All rights reserved.</p>
         </div>
       </div>
     </footer>

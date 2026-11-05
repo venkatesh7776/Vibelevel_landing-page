@@ -32,11 +32,12 @@ export default function CTASection() {
             <p className="mx-auto mt-5 max-w-[540px] text-pretty font-body text-[17px] leading-[1.55] text-black/60 md:text-[19px]">
               See how VibeLevel helps your team evaluate real-world skills, AI collaboration, and job readiness.
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <PrimaryButton href="#book-demo" size="lg">
+            {/* Stacked on phones at one shared width; side by side from sm. */}
+            <div className="mx-auto mt-9 grid w-full max-w-[330px] gap-3 sm:flex sm:max-w-none sm:justify-center sm:gap-4">
+              <PrimaryButton href="/request-demo" size="lg">
                 Book a demo
               </PrimaryButton>
-              <SecondaryButton href="#screening-heading" size="lg" className="bg-white/70">
+              <SecondaryButton href="/#screening-heading" size="lg" className="bg-white/70">
                 Explore VibeLevel Screening
               </SecondaryButton>
             </div>

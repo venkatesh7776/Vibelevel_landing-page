@@ -1,10 +1,10 @@
 import TypedPhrase from "@/components/hero/TypedPhrase";
 import Eyebrow from "./Eyebrow";
 import Reveal from "./Reveal";
-import CompareSlider from "./screening/CompareSlider";
+import PillarsShowcase from "./screening/PillarsShowcase";
 
 /**
- * Section 3 — introduces VibeLevel Screening with a before/after comparison. Same frame as the
+ * Section 3 — introduces VibeLevel Screening and its four pillars. Same frame as the
  * problem section: full-bleed dashed rule on top, side rules, heading left / copy right, and a
  * dashed rule closing the block.
  */
@@ -38,7 +38,7 @@ export default function ScreeningSection() {
           </div>
 
           <Reveal className="px-4 pb-12 sm:px-8 md:pb-16 lg:px-12 lg:pb-20">
-            <CompareSlider />
+            <PillarsShowcase />
           </Reveal>
         </div>
       </div>
