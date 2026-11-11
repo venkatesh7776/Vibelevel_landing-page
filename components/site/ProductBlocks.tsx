@@ -74,7 +74,10 @@ export function ProductHero({
   secondary,
   children,
   stacked,
+  equalButtons,
 }: {
+  /** On phones, stack the two buttons at one shared width. */
+  equalButtons?: boolean;
   /** Put the accent phrase on its own line. */
   stacked?: boolean;
   id: string;
@@ -111,7 +114,9 @@ export function ProductHero({
         >
           {intro}
         </p>
-        <div className="hero-rise mx-auto mt-[22px] grid w-full max-w-[400px] grid-cols-1 gap-3 sm:mt-[26px] sm:flex sm:max-w-none sm:justify-center sm:gap-[12px]" style={{ animationDelay: "300ms" }}>
+        <div className={`hero-rise mx-auto mt-[22px] gap-[12px] sm:mt-[26px] ${
+            equalButtons ? "grid w-fit grid-cols-1 gap-3 sm:flex sm:w-auto sm:justify-center" : "flex flex-wrap justify-center"
+          }`} style={{ animationDelay: "300ms" }}>
           <PrimaryButton href={primary.href}>{primary.label}</PrimaryButton>
           <SecondaryButton href={secondary.href}>{secondary.label}</SecondaryButton>
         </div>

@@ -24,12 +24,12 @@ export default function HeroContent() {
       </p>
       {/* Two equal halves around the centre line keep the gap between the buttons exactly centred,
           whatever each button's width (and the primary grows leftward when its hover arrow appears). */}
-      <div className="hero-rise mx-auto grid w-full max-w-[400px] grid-cols-1 items-start gap-3 sm:max-w-none sm:grid-cols-2 sm:gap-[12px]" style={{ animationDelay: "300ms" }}>
+      <div className="hero-rise grid w-full grid-cols-2 items-start gap-[12px]" style={{ animationDelay: "300ms" }}>
         {/* "Sign up for free" (→ /signup) is parked for now; Book a call leads. */}
-        <PrimaryButton href="/request-demo" className="sm:justify-self-end">
+        <PrimaryButton href="/request-demo" className="justify-self-end">
           Book a call
         </PrimaryButton>
-        <div className="sm:justify-self-start [&>button]:w-full sm:[&>button]:w-auto">
+        <div className="justify-self-start">
           <WatchDemo />
         </div>
       </div>

@@ -55,7 +55,7 @@ export default function AuraHero() {
         >
           Connect your AI tools. Get a real-time score, archetype and skill dimensions from your own work, plus a shareable profile.
         </p>
-        <div className="hero-rise mx-auto mt-[22px] grid w-full max-w-[400px] grid-cols-1 gap-3 sm:mt-[26px] sm:flex sm:max-w-none sm:justify-center sm:gap-[12px]" style={{ animationDelay: "300ms" }}>
+        <div className="hero-rise mx-auto mt-[22px] grid w-fit grid-cols-1 gap-3 sm:mt-[26px] sm:flex sm:w-auto sm:justify-center sm:gap-[12px]" style={{ animationDelay: "300ms" }}>
           <PrimaryButton href="/aura/signup">Discover your Aura free</PrimaryButton>
           <SecondaryButton href="/assessments">Browse assessments</SecondaryButton>
         </div>

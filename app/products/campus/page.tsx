@@ -21,6 +21,7 @@ export default function CampusPage() {
         id="campus-heading"
         badge="VibeLevel Campus"
         stacked
+        equalButtons
         lead="Campus-wide vibeathons &"
         accent="talent pipeline."
         intro="Students discover their AI Style and compete in real IDE challenges. Top performers go straight onto the recruiter radar."

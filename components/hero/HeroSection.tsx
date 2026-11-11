@@ -14,7 +14,7 @@ const fieldScale =
 export default function HeroSection() {
   return (
     <>
-      <HeroNavigation />
+      <HeroNavigation transparent />
       <section className="relative isolate overflow-hidden bg-white">
         {/* On phones the two fields would meet behind the copy, so the middle fades out and leaves a gap. */}
         <PixelFieldGate className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px] max-sm:[mask-image:linear-gradient(to_right,#000_0%,#000_10%,transparent_26%,transparent_74%,#000_90%,#000_100%)]">

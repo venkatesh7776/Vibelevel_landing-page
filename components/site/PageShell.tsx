@@ -17,6 +17,7 @@ export default function PageShell({
   fields = true,
   tinted,
   nav,
+  navTransparent,
 }: {
   children: ReactNode;
   /** Corner pixel fields. */
@@ -25,10 +26,12 @@ export default function PageShell({
   tinted?: boolean;
   /** Navbar actions for this page; defaults to Book a call + Sign in. */
   nav?: NavActions;
+  /** Navbar has no background until the page scrolls. */
+  navTransparent?: boolean;
 }) {
   return (
     <>
-      <HeroNavigation actions={nav} />
+      <HeroNavigation actions={nav} transparent={navTransparent} />
       <main className={`relative isolate overflow-x-clip bg-white ${tinted ? "tint-sections" : ""}`}>
         {fields && (
         <PixelFieldGate className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px] [mask-image:linear-gradient(to_bottom,#000_60%,transparent)] max-sm:[mask-image:linear-gradient(to_right,#000_0%,#000_10%,transparent_26%,transparent_74%,#000_90%,#000_100%)]">

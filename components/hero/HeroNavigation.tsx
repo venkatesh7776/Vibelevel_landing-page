@@ -164,7 +164,10 @@ export type NavActions = { primary: { label: string; href: string }; signin: str
 
 const DEFAULT_ACTIONS: NavActions = { primary: { label: "Book a call", href: "/request-demo" }, signin: "/signin" };
 
-export default function HeroNavigation({ actions = DEFAULT_ACTIONS }: { actions?: NavActions } = {}) {
+export default function HeroNavigation({
+  actions = DEFAULT_ACTIONS,
+  transparent = false,
+}: { actions?: NavActions; /** No background until the page scrolls (home + Hiring heroes). */ transparent?: boolean } = {}) {
   const [open, setOpen] = useState(false); // mobile menu
   const [menu, setMenu] = useState<MenuId | null>(null); // desktop dropdown
   const [scrolled, setScrolled] = useState(false);
@@ -207,7 +210,7 @@ export default function HeroNavigation({ actions = DEFAULT_ACTIONS }: { actions?
       ref={headerRef}
       onPointerLeave={(e) => e.pointerType === "mouse" && hideSoon()}
       className={`hero-fade fixed inset-x-0 top-0 z-50 w-full px-4 py-4 transition-[background-color,box-shadow] duration-300 sm:px-8 lg:px-[80px] ${
-        scrolled || open || menu ? "bg-white shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-16px_rgba(6,36,24,0.18)]" : "bg-white"
+        scrolled || open || menu ? "bg-white shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-16px_rgba(6,36,24,0.18)]" : transparent ? "bg-transparent" : "bg-white"
       }`}
     >
       <nav aria-label="Main" className="relative mx-auto flex w-full max-w-[1280px] items-center justify-between">

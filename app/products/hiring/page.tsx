@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function HiringPage() {
   return (
-    <PageShell>
+    <PageShell navTransparent>
       <HiringHero />
       <ShortlistSection />
       <NewSkillSection />

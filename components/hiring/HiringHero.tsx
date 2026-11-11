@@ -38,7 +38,7 @@ export default function HiringHero() {
         >
           See who can build production-grade work with AI, not just vibe-code.
         </p>
-        <div className="hero-rise mx-auto mt-[22px] grid w-full max-w-[400px] grid-cols-1 gap-3 sm:mt-[26px] sm:flex sm:max-w-none sm:justify-center sm:gap-[12px]" style={{ animationDelay: "300ms" }}>
+        <div className="hero-rise mx-auto mt-[22px] flex flex-wrap justify-center gap-[12px] sm:mt-[26px]" style={{ animationDelay: "300ms" }}>
           <PrimaryButton href="/request-demo">
             Request a Demo
           </PrimaryButton>
