@@ -1,10 +1,10 @@
 import TypedPhrase from "@/components/hero/TypedPhrase";
 import Eyebrow from "./Eyebrow";
 import Reveal from "./Reveal";
-import PillarsShowcase from "./screening/PillarsShowcase";
+import ScreeningJourney from "./screening/ScreeningJourney";
 
 /**
- * Section 3 — introduces VibeLevel Screening and its four pillars. Same frame as the
+ * Section 3 — introduces VibeLevel Screening and the four steps of a screen. Same frame as the
  * problem section: full-bleed dashed rule on top, side rules, heading left / copy right, and a
  * dashed rule closing the block.
  */
@@ -38,7 +38,7 @@ export default function ScreeningSection() {
           </div>
 
           <Reveal className="px-4 pb-12 sm:px-8 md:pb-16 lg:px-12 lg:pb-20">
-            <PillarsShowcase />
+            <ScreeningJourney />
           </Reveal>
         </div>
       </div>

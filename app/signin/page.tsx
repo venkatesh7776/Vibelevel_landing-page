@@ -42,12 +42,12 @@ export default function SigninPage() {
               </h2>
               <p className="mt-3 max-w-[260px] flex-1 text-pretty font-body text-[15px] leading-[1.55] text-black/55">{a.description}</p>
 
-              <PrimaryButton href={`/signup?product=${a.id}&mode=login`} size="sm" className="mt-8">
+              <PrimaryButton href={a.login} size="sm" className="mt-8">
                 Log in
               </PrimaryButton>
               <p className="mt-6 font-body text-[14px] text-black/50">Don&rsquo;t have an account?</p>
               <Link
-                href={`/signup?product=${a.id}`}
+                href={a.join}
                 className="group/cta mt-1 inline-flex items-center gap-1.5 font-body text-[15px] font-medium text-brand-green"
               >
                 {a.cta}

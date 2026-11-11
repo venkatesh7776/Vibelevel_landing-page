@@ -1,23 +1,37 @@
 import type { ReactNode } from "react";
-import HeroNavigation from "@/components/hero/HeroNavigation";
+import HeroNavigation, { type NavActions } from "@/components/hero/HeroNavigation";
 import LeftPixelField from "@/components/hero/LeftPixelField";
 import PixelFieldGate from "@/components/hero/PixelFieldGate";
 import RightPixelField from "@/components/hero/RightPixelField";
 import Footer from "@/components/sections/Footer";
 
-const fieldScale = "scale-[0.45] sm:scale-[0.55] lg:scale-[0.7]";
+// Same scale as the home hero, so the pixels read at the same size on every page.
+const fieldScale = "scale-[0.62] sm:scale-[0.7] lg:scale-[0.85] xl:scale-100";
 
 /**
  * Frame for every page other than the home page: the same navbar, the hero's live pixel fields
  * fading down from the top corners, and the footer.
  */
-export default function PageShell({ children, fields = true }: { children: ReactNode; /** Corner pixel fields. */ fields?: boolean }) {
+export default function PageShell({
+  children,
+  fields = true,
+  tinted,
+  nav,
+}: {
+  children: ReactNode;
+  /** Corner pixel fields. */
+  fields?: boolean;
+  /** Alternate the sections' backgrounds with soft tints (product pages). */
+  tinted?: boolean;
+  /** Navbar actions for this page; defaults to Book a call + Sign in. */
+  nav?: NavActions;
+}) {
   return (
     <>
-      <HeroNavigation />
-      <main className="relative isolate overflow-hidden bg-white">
+      <HeroNavigation actions={nav} />
+      <main className={`relative isolate overflow-x-clip bg-white ${tinted ? "tint-sections" : ""}`}>
         {fields && (
-        <PixelFieldGate className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+        <PixelFieldGate className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[900px] [mask-image:linear-gradient(to_bottom,#000_60%,transparent)] max-sm:[mask-image:linear-gradient(to_right,#000_0%,#000_10%,transparent_26%,transparent_74%,#000_90%,#000_100%)]">
           <div className={`absolute left-[-20px] top-0 origin-top-left ${fieldScale}`}>
             <LeftPixelField />
           </div>

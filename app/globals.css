@@ -212,3 +212,71 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .pc-rise { animation: none; }
 }
+
+/* Section 3 journey: dots march along the wave; a ring pings from step to step. */
+@keyframes journey-flow {
+  to { stroke-dashoffset: -18; }
+}
+.journey-flow {
+  animation: journey-flow 1.2s linear infinite;
+}
+@keyframes journey-ping {
+  0% { opacity: 0; scale: 1; }
+  4% { opacity: 1; scale: 1; }
+  30%, 100% { opacity: 0; scale: 1.6; }
+}
+.journey-ping {
+  opacity: 0;
+  animation: journey-ping 3.6s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-flow, .journey-ping { animation: none; }
+}
+
+/* Hiring page: dots stream into and out of the scoring engine; its pixel ring turns; the iterate loop spins. */
+.engine-stream-x {
+  background-image: radial-gradient(circle, var(--color-brand-green) 1.4px, transparent 1.6px);
+  background-size: 10px 3px;
+  animation: engine-stream-x 0.9s linear infinite;
+  opacity: 0.7;
+}
+.engine-stream-y {
+  background-image: radial-gradient(circle, var(--color-brand-green) 1.4px, transparent 1.6px);
+  background-size: 3px 10px;
+  animation: engine-stream-y 0.9s linear infinite;
+  opacity: 0.7;
+}
+@keyframes engine-stream-x { to { background-position: 10px 0; } }
+@keyframes engine-stream-y { to { background-position: 0 10px; } }
+@keyframes engine-spin { to { rotate: 360deg; } }
+.engine-spin { animation: engine-spin 22s linear infinite; }
+.journey-spin { animation: engine-spin 2.4s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .engine-stream-x, .engine-stream-y, .engine-spin, .journey-spin { animation: none; }
+}
+
+/* ---------- Product pages: one green, alternating light section tints ----------
+ * Aura, Campus and Teams keep VibeLevel green but alternate their section backgrounds between
+ * white and soft tints (mint, warm cream), so long pages have rhythm without a new colour theme.
+ * Unlayered, so it wins over the sections' bg-white utility.
+ */
+:root {
+  --grad-a: #d4f1dd;
+  --grad-b: #eef6df;
+  --grad-c: #fdf1c7;
+}
+.tint-sections > section:nth-of-type(4n + 2) {
+  background: linear-gradient(180deg, #f1f9f3 0%, #f6fbf4 100%);
+}
+.tint-sections > section:nth-of-type(4n + 4) {
+  background: linear-gradient(180deg, #fdfaf1 0%, #fbf8ee 100%);
+}
+
+/* Section headings are link targets (menus link to /page#…-heading): keep them clear of the fixed navbar. */
+[id$="-heading"] { scroll-margin-top: 120px; }
+
+/* Pixel layers are self-contained: their blink and cursor-repel never trigger layout or
+   paint work outside the SVG itself. */
+svg:has(> .pf-blink) {
+  contain: layout paint style;
+}

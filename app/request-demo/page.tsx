@@ -53,7 +53,7 @@ export default function RequestDemoPage() {
           <DemoForm />
         </section>
 
-        <aside className="grid gap-6">
+        <aside className="grid gap-6 lg:sticky lg:top-[104px]">
           <div
             className="pc-rise relative isolate overflow-hidden rounded-[24px] p-7 ring-1 ring-black/[0.05] sm:p-8"
             style={{ backgroundImage: GRADIENT, animationDelay: "120ms" }}

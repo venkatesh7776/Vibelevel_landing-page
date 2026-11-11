@@ -24,7 +24,7 @@ const PRODUCTS: Product[] = [
     title: ["Practice.", "Earn evidence you can share."],
     body: "Practice in a real AI workspace and earn shareable skill evidence.",
     cta: "Explore Aura",
-    href: "#aura",
+    href: "/products/aura",
     visual: <AuraVisual />,
     // The mint end of the theme gradient.
     gradient: "linear-gradient(160deg in oklab, #d4f1dd 0%, #eef6df 100%)",
@@ -35,7 +35,7 @@ const PRODUCTS: Product[] = [
     title: ["AI-ready students,", "proven to employers."],
     body: "Run campus-wide AI vibeathons and surface top performers to hiring partners.",
     cta: "Explore Campus",
-    href: "#campus",
+    href: "/products/campus",
     visual: <CampusVisual />,
     // The cream end of the theme gradient.
     gradient: "linear-gradient(160deg in oklab, #eef6df 0%, #fdf1c7 100%)",

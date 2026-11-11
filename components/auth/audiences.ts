@@ -17,11 +17,16 @@ export type Audience = {
   signupLead: string;
   /** Ask for a company name on sign-up. */
   company: boolean;
+  /** Where Log in / the sign-up link go. Aura, Campus and Teams have their own auth pages. */
+  login: string;
+  join: string;
 };
 
 export const AUDIENCES: Audience[] = [
   {
     id: "aura",
+    login: "/aura/signin",
+    join: "/aura/signup",
     label: "Aura",
     icon: "aura",
     title: "Individual Builders",
@@ -33,6 +38,8 @@ export const AUDIENCES: Audience[] = [
   },
   {
     id: "hiring",
+    login: "/signup?product=hiring&mode=login",
+    join: "/signup?product=hiring",
     label: "Hiring",
     icon: "doc",
     title: "Recruiters & Hiring Managers",
@@ -44,6 +51,8 @@ export const AUDIENCES: Audience[] = [
   },
   {
     id: "campus",
+    login: "/campus/signin",
+    join: "/campus/signup",
     label: "Campus",
     icon: "campus",
     title: "Students & Coordinators",
@@ -55,6 +64,8 @@ export const AUDIENCES: Audience[] = [
   },
   {
     id: "teams",
+    login: "/teams/signin",
+    join: "/teams/signup",
     label: "Teams",
     icon: "team",
     title: "Enterprise & Workforce",

@@ -36,11 +36,11 @@ function LogoRun({ hidden }: { hidden?: boolean }) {
   );
 }
 
-export default function HeroToolStrip() {
+export default function HeroToolStrip({ title = "Technical screening using" }: { title?: string } = {}) {
   return (
     <div className="hero-rise flex w-full flex-col items-center gap-7 font-body sm:gap-9" style={{ animationDelay: "600ms" }}>
       <p className="text-center text-[16px] font-medium text-black sm:text-[18px]">
-        Technical screening using
+        {title}
       </p>
 
       {/* Horizontal loop, capped at 1200px, with soft fades so logos drift in and out. Hover pauses it. */}

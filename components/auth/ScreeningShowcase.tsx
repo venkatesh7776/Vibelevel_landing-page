@@ -7,7 +7,7 @@ const GRADIENT = "linear-gradient(150deg in oklab, #d4f1dd 0%, #eef6df 55%, #fdf
 export default function ScreeningShowcase() {
   return (
     <div
-      className="relative isolate flex h-full min-h-[560px] flex-col items-center justify-center overflow-hidden rounded-[28px] px-6 py-14 ring-1 ring-black/[0.05] sm:px-12"
+      className="relative isolate flex h-full min-h-[560px] flex-col items-center justify-center overflow-hidden rounded-[28px] px-6 py-14 ring-1 ring-black/[0.05] sm:px-12 lg:sticky lg:top-[96px] lg:max-h-[calc(100dvh-120px)]"
       style={{ backgroundImage: GRADIENT }}
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10">

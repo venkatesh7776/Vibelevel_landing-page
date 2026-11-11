@@ -9,9 +9,10 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Screening", href: "/#screening-heading" },
-      { label: "Aura", href: "/#aura" },
-      { label: "Campus", href: "/#campus" },
+      { label: "Hiring", href: "/products/hiring" },
+      { label: "Aura", href: "/products/aura" },
+      { label: "Teams", href: "/products/teams" },
+      { label: "Campus", href: "/products/campus" },
     ],
   },
   {
@@ -30,7 +31,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "FAQ", href: "/#faq-heading" },
     ],
   },
-  { title: "Legal", links: [{ label: "Privacy Policy" }, { label: "Terms of Service" }] },
+  { title: "Legal", links: [{ label: "Privacy Policy" }, { label: "Terms of Service", href: "/terms" }] },
 ];
 
 const linkClass = "font-body text-[15px] text-black/55";

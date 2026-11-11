@@ -1,5 +1,7 @@
 // Small icons drawn on a 9×9 pixel grid — the site's pixel language, used in menus and cards.
 
+import { ICONS as GLYPHS } from "./glyphs";
+
 const ICONS = {
   // Hiring: a document
   doc: [
@@ -135,12 +137,14 @@ const ICONS = {
   ],
 } satisfies Record<string, string[]>;
 
-export type PixelIconName = keyof typeof ICONS;
+const ALL = { ...ICONS, ...GLYPHS };
+
+export type PixelIconName = keyof typeof ALL;
 
 export default function PixelIcon({ name, className = "size-5" }: { name: PixelIconName; className?: string }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 18 18" shapeRendering="crispEdges" className={className}>
-      {ICONS[name].flatMap((row, y) =>
+      {ALL[name].flatMap((row, y) =>
         [...row].map((c, x) =>
           c === "#" ? <rect key={`${x}-${y}`} x={x * 2} y={y * 2} width="1.7" height="1.7" fill="currentColor" /> : null,
         ),

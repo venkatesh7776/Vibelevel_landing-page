@@ -12,8 +12,7 @@ type MenuId = "products" | "resources";
 
 const LINKS: { label: string; menu?: MenuId; href?: string }[] = [
   { label: "Products", menu: "products" },
-  // No assessments library page yet: shown, but not linked.
-  { label: "Browse Assessments" },
+  { label: "Browse Assessments", href: "/assessments" },
   { label: "Resources", menu: "resources" },
   { label: "Pricing", href: "/pricing" },
 ];
@@ -52,8 +51,9 @@ function Chevron({ open = false }: { open?: boolean }) {
 
 /** A link when it has a destination, plain text otherwise. */
 function MaybeLink({ href, className, children, onClick }: { href?: string; className: string; children: React.ReactNode; onClick?: () => void }) {
+  const external = href?.startsWith("http");
   return href ? (
-    <a href={href} className={className} onClick={onClick}>
+    <a href={href} className={className} onClick={onClick} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
       {children}
     </a>
   ) : (
@@ -79,9 +79,15 @@ function ProductsPanel({ onPick }: { onPick: () => void }) {
           </MaybeLink>
           <ul className="mt-5 space-y-3 border-t border-dashed border-black/10 pt-5">
             {p.features.map((f) => (
-              <li key={f} className="flex items-center gap-2.5 font-body text-[14px] text-black/70">
-                <span aria-hidden="true" className="size-[5px] shrink-0 bg-brand-green/70" />
-                {f}
+              <li key={f.label}>
+                <MaybeLink
+                  href={f.href}
+                  onClick={onPick}
+                  className={`group/f flex items-center gap-2.5 font-body text-[14px] text-black/70 ${f.href ? `transition-colors hover:text-brand-green ${FOCUS}` : ""}`}
+                >
+                  <span aria-hidden="true" className="size-[5px] shrink-0 bg-brand-green/70 transition-transform group-hover/f:scale-150" />
+                  {f.label}
+                </MaybeLink>
               </li>
             ))}
           </ul>
@@ -154,7 +160,11 @@ function MobileGroup({ label, children }: { label: string; children: React.React
 
 /* ---------- Navbar ---------- */
 
-export default function HeroNavigation() {
+export type NavActions = { primary: { label: string; href: string }; signin: string };
+
+const DEFAULT_ACTIONS: NavActions = { primary: { label: "Book a call", href: "/request-demo" }, signin: "/signin" };
+
+export default function HeroNavigation({ actions = DEFAULT_ACTIONS }: { actions?: NavActions } = {}) {
   const [open, setOpen] = useState(false); // mobile menu
   const [menu, setMenu] = useState<MenuId | null>(null); // desktop dropdown
   const [scrolled, setScrolled] = useState(false);
@@ -197,7 +207,7 @@ export default function HeroNavigation() {
       ref={headerRef}
       onPointerLeave={(e) => e.pointerType === "mouse" && hideSoon()}
       className={`hero-fade fixed inset-x-0 top-0 z-50 w-full px-4 py-4 transition-[background-color,box-shadow] duration-300 sm:px-8 lg:px-[80px] ${
-        scrolled || open || menu ? "bg-white shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-16px_rgba(6,36,24,0.18)]" : "bg-transparent"
+        scrolled || open || menu ? "bg-white shadow-[0_1px_0_rgba(0,0,0,0.06),0_8px_24px_-16px_rgba(6,36,24,0.18)]" : "bg-white"
       }`}
     >
       <nav aria-label="Main" className="relative mx-auto flex w-full max-w-[1280px] items-center justify-between">
@@ -228,14 +238,12 @@ export default function HeroNavigation() {
         </div>
 
         <div className="hidden items-center gap-[14px] lg:flex" onPointerEnter={hideSoon}>
-          <a href="/signin" className={`${LINK} px-1`}>
+          {/* One highlighted action per page (default: Book a call). The free-trial sign-up is parked; /signup still exists. */}
+          <SecondaryButton href={actions.signin} size="sm">
             Sign in
-          </a>
-          <SecondaryButton href="/request-demo" size="sm">
-            Book a demo
           </SecondaryButton>
-          <PrimaryButton href="/signup" size="sm">
-            Start a free trial
+          <PrimaryButton href={actions.primary.href} size="sm">
+            {actions.primary.label}
           </PrimaryButton>
         </div>
 
@@ -288,7 +296,9 @@ export default function HeroNavigation() {
               ))}
             </MobileGroup>
             <li>
-              <span className="flex px-2 py-3 text-[16px] font-medium text-ink">Browse Assessments</span>
+              <a href="/assessments" className="flex px-2 py-3 text-[16px] font-medium text-ink hover:text-brand-green">
+                Browse Assessments
+              </a>
             </li>
             <MobileGroup label="Resources">
               {RESOURCES.flatMap((c) => c.links).map((l) => (
@@ -308,15 +318,12 @@ export default function HeroNavigation() {
             </li>
           </ul>
           <div className="mt-4 grid gap-3 border-t border-black/5 pt-4">
-            <a href="/signin" className="px-2 py-1 text-[16px] font-medium text-ink hover:text-brand-green">
-              Sign in
-            </a>
-            <SecondaryButton href="/request-demo" className="w-full">
-              Book a demo
-            </SecondaryButton>
-            <PrimaryButton href="/signup" className="w-full">
-              Start a free trial
+            <PrimaryButton href={actions.primary.href} className="w-full">
+              {actions.primary.label}
             </PrimaryButton>
+            <SecondaryButton href={actions.signin} className="w-full">
+              Sign in
+            </SecondaryButton>
           </div>
         </div>
       )}

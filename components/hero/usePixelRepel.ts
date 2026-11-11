@@ -23,9 +23,21 @@ export function usePixelRepel(svgRef: RefObject<SVGSVGElement | null>, fieldWidt
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
+    // Off-screen fields sleep: their blink pauses (see [data-pf-paused] in globals.css) and they
+    // ignore scroll/pointer events, so a page full of pixel cards costs nothing while scrolling.
+    let visible = true;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting;
+        svg.setAttribute("data-pf-paused", String(!visible));
+      },
+      { rootMargin: "100px" },
+    );
+    io.observe(svg);
+
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!finePointer || reduced) return;
+    if (!finePointer || reduced) return () => io.disconnect();
 
     const rects = Array.from(svg.querySelectorAll("rect"));
     const n = rects.length;
@@ -121,10 +133,12 @@ export function usePixelRepel(svgRef: RefObject<SVGSVGElement | null>, fieldWidt
     };
 
     const schedule = () => {
+      // Off-screen with nothing still springing back: no work at all.
+      if (!visible && !active.size) return;
       if (!raf) raf = requestAnimationFrame(frame);
     };
     const onMove = (e: PointerEvent) => {
-      if (e.pointerType !== "mouse") return;
+      if (e.pointerType !== "mouse" || !visible) return;
       pointer = { x: e.clientX, y: e.clientY };
       schedule();
     };
@@ -138,6 +152,7 @@ export function usePixelRepel(svgRef: RefObject<SVGSVGElement | null>, fieldWidt
     window.addEventListener("blur", onLeave);
     window.addEventListener("scroll", schedule, { passive: true });
     return () => {
+      io.disconnect();
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
       document.documentElement.removeEventListener("pointerleave", onLeave);
